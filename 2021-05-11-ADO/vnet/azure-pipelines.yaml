@@ -1,7 +1,4 @@
 # Azure DevOps pipeline for Azure deployment
-
-pool:
-  vmImage: 'Ubuntu-16.04'
   
 variables:
 - group: terraform-tuesdays
@@ -20,15 +17,15 @@ stages:
   jobs:
   - job: validate
     pool:
-      vmImage: ubuntu-latest
+      vmImage: ubuntu-20.04
     steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
       displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
   # Init
-    - task: TerraformCLI@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -39,7 +36,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Validate
-    - task: TerraformCLI@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
       displayName: Validate Config
       inputs:
         command: 'validate'
@@ -50,15 +47,15 @@ stages:
   jobs:
   - job: plan
     pool:
-      vmImage: ubuntu-latest
+      vmImage: ubuntu-20.04
     steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
       displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
   # Init
-    - task: TerraformCLI@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -69,7 +66,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Plan
-    - task: TerraformCLI@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
       displayName: Plan Terraform Deployment
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -100,15 +97,15 @@ stages:
   jobs:
   - job: apply
     pool:
-      vmImage: ubuntu-latest
+      vmImage: ubuntu-20.04
     steps:
-    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
       displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
   # Init
-    - task: TerraformCLI@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -119,7 +116,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Apply
-    - task: TerraformCLI@0
+    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
       displayName: Apply Terraform Deployment
       env:
         ARM_SAS_TOKEN: $(sas_token)
