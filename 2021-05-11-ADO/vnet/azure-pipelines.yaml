@@ -1,5 +1,8 @@
 # Azure DevOps pipeline for Azure deployment
 
+pool:
+  vmImage: 'Ubuntu-16.04'
+  
 variables:
 - group: terraform-tuesdays
 
@@ -25,7 +28,7 @@ stages:
         terraformVersion: 'latest'
 
   # Init
-    - task: terraform@0
+    - task: TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -36,7 +39,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Validate
-    - task: terraform@0
+    - task: TerraformCLI@0
       displayName: Validate Config
       inputs:
         command: 'validate'
@@ -55,7 +58,7 @@ stages:
         terraformVersion: 'latest'
 
   # Init
-    - task: terraform@0
+    - task: TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -66,7 +69,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Plan
-    - task: terraform@0
+    - task: TerraformCLI@0
       displayName: Plan Terraform Deployment
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -105,7 +108,7 @@ stages:
         terraformVersion: 'latest'
 
   # Init
-    - task: terraform@0
+    - task: TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -116,7 +119,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Apply
-    - task: terraform@0
+    - task: TerraformCLI@0
       displayName: Apply Terraform Deployment
       env:
         ARM_SAS_TOKEN: $(sas_token)
