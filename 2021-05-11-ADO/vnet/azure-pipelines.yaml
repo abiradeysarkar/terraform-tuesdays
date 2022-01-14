@@ -19,13 +19,13 @@ stages:
     pool:
       vmImage: ubuntu-20.04
     steps:
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
       displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
   # Init
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+    - task: TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -36,7 +36,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Validate
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+    - task: TerraformCLI@0
       displayName: Validate Config
       inputs:
         command: 'validate'
@@ -49,13 +49,13 @@ stages:
     pool:
       vmImage: ubuntu-20.04
     steps:
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
       displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
   # Init
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+    - task: TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -66,7 +66,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Plan
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+    - task: TerraformCLI@0
       displayName: Plan Terraform Deployment
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -99,13 +99,13 @@ stages:
     pool:
       vmImage: ubuntu-20.04
     steps:
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+    - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
       displayName: Install Terraform
       inputs:
         terraformVersion: 'latest'
 
   # Init
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+    - task: TerraformCLI@0
       displayName: Initialize Terraform
       env:
         ARM_SAS_TOKEN: $(sas_token)
@@ -116,7 +116,7 @@ stages:
         backendType: 'selfConfigured'
 
   # Apply
-    - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-cli.TerraformCLI@0
+    - task: TerraformCLI@0
       displayName: Apply Terraform Deployment
       env:
         ARM_SAS_TOKEN: $(sas_token)
